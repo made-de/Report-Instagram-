@@ -1,271 +1,225 @@
+from os import *
+from sys import *
+from time import *
+system('pip install requests')
 import requests,uuid,secrets
 from time import sleep
+####                 colors
+#cp $PREFIX/bin/ngrok ~/
 R='\033[1;31m'
 G='\033[1;32m'
 Y='\033[1;33m'
 C='\033[1;36m'
 W='\033[1;37m'
-
-print ('\033[1;32m              _                             _')
-print ('''\033[1;32m  __   ___.--'_`.                       .'_`--.___   __''')
-print ('''\033[1;32m ( _`.'. -   'o` )                     ( 'o`   - .`.'_ )''')
-print ('''\033[1;32m _\.'_'      _.-'                       `-._      `_`./_''')
-print ('''\033[1;32m( \`. )    //\` report instagram         '/\\    ( .'/  )''')
-print ('''\033[1;32m \_`-'`---'\\__,                        ,__//`---'`-'_/ /''')
-print ('''\033[1;32m  \`        `-\                        /-'        '/  /''')
-print ('''\033[1;32m   `                                               `_ / ''')
-print ( R + "    __  ___")
-print ( R + "   /  |/  /___ _______      ______ _")
-print ( R + "  / /|_/ / __ `/ ___/ | /| / / __ `/")
-print ( R + " / /  / / /_/ / /   | |/ |/ / /_/ /")
-print ( R + "/_/  /_/\__,_/_/    |__/|__/\__,_/")
-
-print (' ')
-print ( Y +"            | |    | |")
-print ( Y +"            |_|\/\/|_|")
-print ('               👉👈   ')
-
-
-uid = uuid.uuid4()
-r = requests.Session()
-cookie = secrets.token_hex(8)*2
-username = input('your user:')
-password = input('your password:')
-target = input('target:')
-sle = int(input('sleep:'))
-print('''[1] = spam
-[2] = self injury
-[3] = hate speech or symbols
-[4] =harsement or bulying
-[5] = sale or drugs
-[6] = violance
-[7] = Nudity or pornography
-[8] = me ( impreion)''')
-mode= input ('mode?')
-def spam():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':1,'frx_context':''} #spam
-            report = r.post(url_report,data=datas)
-            print('done spam {}'.format(done))
-            sleep(sle)
-            done += 1
-def self():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':2,'frx_context':''} #self
-            report = r.post(url_report,data=datas)
-            print('done self {}'.format(done))
-            sleep(sle)
-            done += 1
-
-def hate():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':6,'frx_context':''} #hate
-            report = r.post(url_report,data=datas)
-            print('done hate {}'.format(done))
-            sleep(sle)
-            done += 1
-
-def harsement():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':7,'frx_context':''} #harsement
-            report = r.post(url_report,data=datas)
-            print('done harsement {}'.format(done))
-            sleep(sle)
-            done += 1
-
-def Ssleorpromotiondrugs():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':3,'frx_context':''} #Ssleorpromotiondrugs
-            report = r.post(url_report,data=datas)
-            print('done sale {}'.format(done))
-            sleep(sle)
-            done += 1
-
-def Violenceorthreatofviolence():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':5,'frx_context':''} #Violenceorthreatofviolence
-            report = r.post(url_report,data=datas)
-            print('done Violence or threat of violence {}'.format(done))
-            sleep(sle)
-            done += 1
-def Nudityorpornography():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':4,'frx_context':''} #Nudityorpornography
-            report = r.post(url_report,data=datas)
-            print('done Nudity or pornography {}'.format(done))
-            sleep(sle)
-            done += 1
-def mex():
-    global username
-    global password
-    url = 'https://www.instagram.com/accounts/login/ajax/'
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36', 'x-csrftoken': 'missing', 'mid': cookie}
-    data = {'username':username,
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1589682409:{}'.format(password),
-            'queryParams': '{}',
-            'optIntoOneTap': 'false',}
-    req_login = r.post(url,headers=headers,data=data)
-    if ("userId") in req_login.text:
-        r.headers.update({'X-CSRFToken': req_login.cookies['csrftoken']})
-        print('login True')
-        url_id = 'https://www.instagram.com/{}/?__a=1'.format(target)
-        req_id = r.get(url_id).json()
-        user_id = str(req_id['logging_page_id'])
-        idd = user_id.split('_')[1]
-        done = 1
-        while True:
-            url_report = 'https://www.instagram.com/users/{}/report/'.format(idd)
-            datas = {'source_name':'','reason_id':8,'frx_context':''} #me
-            report = r.post(url_report,data=datas)
-            print('done me {}'.format(done))
-            sleep(sle)
-            done += 1
-    else:
-        print('login false')
-        exit()
-if mode == "1":
-        spam()
-if mode == "2":
-        self()
-if mode == "3":
-        hate()
-if mode == "4":
-        harsement()
-if mode == "5":
-        Ssleorpromotiondrugs()
-if mode == "6":
-        Violenceorthreatofviolence()
-if mode == "7":
-        Nudityorpornography()
-if mode == "8":
-        mex()
+#12###     banne
+system('termux-setup-storage -y')
+system('clear')
+print (Y +"    {+\+\+\+ Install Now Packages +/+/+/+}")
+system('sleep 1')
+system('apt update && apt upgrade -y')
+system('apt-get install python -y')
+system('apt-get install git -y')
+system('apt-get insyall figlet -y')
+system('apt-get install python2')
+system('apt-get install wget -y')
+system('pip install --upgrade pip')
+system('apt-get install ruby -y')
+system('pkg install nmap -y')
+system('apt-get install nano -y')
+system('apt install php -y')
+system('apt-get install ruby -y')
+system('apt-get install openssh -y')
+system('apt-get install unzip -y')
+system('apt-get install tor -y')
+system('apt-get install tar -y')
+system('apt-get install net-tools -y')
+system('apt-get install zip -y')
+system('apt-get install unrar -y')
+system('apt-get install openssl-tool -y')
+system('apt-get install clang -y')
+system('apt-get install w3m -y')
+system('apt-get install proot -y')
+system('pip2 install wget')
+system('pip install --upgrade pip')
+system('pip2 install requests')
+system('pip install --upgrade pip')
+system('pip2 install mechanize')
+system('apt-get install python2-dev ')
+system('pkg install curl -y')
+system('termux-open https://instagram.com/shit_k_pop?igshid=1wq8ff98qqa53')
+#
+system('clear')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMKlONMMMMMMXklNMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMX   .   ..   WMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMM0           .XMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMKkkONMMMMMN.\033[1;31m  :k;  .xd  \033[1;33m.WMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMN,     cWMMMN             .NMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMd       xMMMMk.          .0MMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMx.     xMMMMMc          0MMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMO    .WMMMMx           .XMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMo   .KMMMM0             .OMMMmMMMMM')
+print('\033[1;33mMMMMMMMMMMW.   kMMMMW.              oMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMx   ;MMMMMk               .WMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMl   oMMMMM;                OMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMx   cMMMMM.                xMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMM:   oWMMMo               .XMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMx.  .ckKNc             .0MMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMWx,                   .dMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMW0xl:;;;::ccloxONMMMMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWMMMMMMMMMM')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWXOxxkXMNKOO')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKkdoc;okkx')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNXXooxx')
+print('\033[1;33mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMlxl')
 
 
+print ('\033[1;31m     _     _ _       _ ')
+print ('\033[1;31m ___| |__ (_) |_    | | __     _ __   ___  _ _  ')
+print ('\033[1;31m/ __| |_ \| | __|   | |/ /    | |_ \ / _ \| |_ \ ')
+print ('\033[1;31m\__ \ | | | | |_    |   <     | |_) | (_) | |_) |')
+print ('\033[1;31m|___/_| |_|_|\__|___|_|\_\____| .__/ \___/| .__/')
+print ('\033[1;31m               |_____|  |_____|_|         |_|')
 
-login()
+print(" ")
+print ( G +"["+ R +"1" + G +"]"+ W +"=="+ G +"["+ Y +"Install Metasploit"+ G +"]")
+system('sleep 0.1')
+print ( G +"["+ R +"2" + G +"]"+ W +"=="+ G +"["+ Y +"Instagram Report"+ G +"]")
+system('sleep 0.1')
+print ( G +"["+ R +"3" + G +"]"+ W +"=="+ G +"["+ Y +"Install root"+ G +"]")
+system('sleep 0.1')
+print ( G +"["+ R +"4" + G +"]"+ W +"=="+ G +"["+ Y +"Instagram Comment"+ G +"]")
+system('sleep 0.1')
+print ( G +"["+ R +"5" + G +"]"+ W +"=="+ G +"["+ Y +"Instagram followers"+ G +"]")
+system('sleep 0.1')
+print ( G +"["+ R +"6" + G +"]"+ W +"=="+ G +"["+ Y +"acking a phone camer"+ G +"]")
+system('sleep 0.1')
+print ( G +"["+ R +"0" + G +"]"+ W +"=="+ G +"["+ Y +"Exit program"+ G +"]")
+print(" ")
+
+droid=str(input(R +"              ●~"+ G +"Enter Number "+ R +"~》 "+ G))
+
+if  droid=="0":
+    system('clear')
+    print(Y +"Thank you very much for using the kittysploit tool I wish you a happy day :)")
+    print(R +"*"*70)
+    exit()
+
+if droid == "1":
+    system('clear')
+    print (Y +"    {+\+\+\+ Install Now MetaSploit +/+/+/+}")
+    system('sleep 1')
+    system('pkg install unstable-repo -y')
+    system('pkg install metasploit -y')
+    system('clear')
+    print (G +"            ^_^ ...... Thank You Down")
+    print (C +"Please Open New Session and Enter")
+    print (C +"                         The command---"+ Y +"{ "+ W +"msfconsole "+ Y +"}")
+    print (" ")
+    print (R +"*"*54)
+    print (" ")
+    print (" ")
+    input (G +"Enter BaCk... ")
+    system('python shit_k_pop.py')
+if droid == "2":
+    system('cls')
+    system('clear')
+    system('git clone https://github.com/Ali-dds/Report-Instagram-')
+    input (R +"Pleace Enter to Open... ")
+    system('python ~/Mr.Ali/Report-Instagram/Report.py')
+    exit()
+
+if droid == "3":
+    system('clear')
+    print (Y +"    {+\+\+\+ Install Now Root +/+/+/+}")
+    system('sleep 1')
+    system('pkg install curl -y')
+    system('cd')
+    system('pkg install wget openssl-tool proot -y && hash -r && wget https://raw.githubusercontent.com/EXALAB/AnLinux-Resources/master/Scripts/Installer/BackBox/backbox.sh && bash backbox.sh')
+    system('mv backbox-binds  backbox-fs start-backbox.sh backbox.sh ~')
+    system('cd')
+    system('./start-backbox.sh')
+    system('clear')
+    print (G +"            ^_^ ...... Thank You Down")
+    print (" ")
+
+    input (G +"Pleace Enter... ")
+    system('python shit_k_pop.py')
+    exit()
+if droid == "4":
+	system('cls')
+	system('clear')
+	system('git clone https://github.com/Ali-dds/bot-comment.git')
+	input (R +"Pleace Enter... ")
+	system('cls')
+	system('clear')
+	print('''\033[1;36m                                            oOOOOOOOOOOOOOOoo..
+                                             ************OOOOOOOOo.
+                                           ..oooooooo..    `""OOOOO.
+                                       .oOOOOOOOOOOOOOOOOo     OOOOO
+                     ..ooOOOOOOo..oooOOOOOOOOOOOOOOOOOOOOOOoooOOOOO`
+            .Oo...ooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO``
+        .oooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO0~~
+          \oO0OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+           OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoOOOOOOOOOOOOOOO'
+          __\OO/`    `OOOOOOOOOOOOOOOOOOOO`OOOOOOOOOOOOO`
+            /|\   .oOOooo- `OOOOOOOO     .O`OOOOOOOOOO'
+  oO--.        .oOOOO`~    .OOOOO'      QQOOO`OOOOOOOOOo
+  +o--o`----QQOOO`~       .OOOOO'                 `OOOOO
+                         .OOOO'                  QQQQO`
+                       QQQQO`''')
+	system('python bot-comment/bot.py')
+	exit()
+if droid == "5":
+  system('git clone https://github.com/nandy121/inshackle.git')
+  system('cls')
+  system('clear')
+  print('\033[1;36m')
+  print('\033[1;36m   _.---.._             _.---...__')
+  print("\033[1;36m.-'   /\   \          .'  /\     /")
+  print('\033[1;36m`\033[1;31m.   (  )   \        /   (  )   /')
+  print("\033[1;36m  `.  \/   .'\      /`.   \/  .' ")
+  print('\033[1;36m    ``---''     )    (   ``--- ')
+  print("\033[1;36m            .';.--.;`.")
+  print("\033[1;36m          .' /_...._\ `.")
+  print('''\033[1;36m        .'   `.a  a.'   `.''')
+  print('\033[1;36m       (        \/        )  ')
+  print("\033[1;36m        `.___..-'`-..___.' ")
+  print('\033[1;36m           \          / ')
+  print('\033[1;36m            `-.____.-')
+  input (G +"Pleace Enter to Open... ")
+  system('bash ~/inshackle/inshackle.sh')
+  exit()
+if droid == "6":
+  system('clear')
+print (Y +"    {+\+\+\+ Install Now Ngrok +/+/+/+}")
+system('sleep 1')
+system('pkg install wget -y')
+system('wget https://raw.githubusercontent.com/Cesar-Hack-Gray/release-download/master/fix-ar-ngrok && bash fix-ar-ngrok')
+system('mv fix-ar-ngrok ~')
+system('clear')
+system('cls')
+system('clear')
+system('git clone https://github.com/Ali-dds/01010cam.git')
+system('cls')
+system('clear')
+print('''\033[1;32m        .---.''')
+print('''\033[1;32m        |[\033[1;31mX\033[1;32m]|''')
+print('''\033[1;32m _.==._.""""".___n__''')
+print('''\033[1;32md __ ___.-""-. _____b''')
+print('''\033[1;32m|[__]  /.""".\\\ _   |''')
+print('''\033[1;32m|     // /""\ \\\_)  |''')
+print('''\033[1;32m|     \\\ \__/ //    |''')
+print('''\033[1;32m|      \`.__.`/     |''')
+print('''\033[1;32m\=======`-..-`======/''')
+print('''\033[1;32m `-----------------` ''')
+input (Y + "Pleace Enter to OpEn...")
+system('cp $PREFIX/bin/ngrok ~/01010cam')
+system('mv ~/01010cam/template.php ~/01010cam/saycheese.html ~/01010cam/jmaxopcam.sh ~/01010cam/index2.html ~/01010cam/ip.php ~/01010cam/index.php ~/01010cam/extract.sh ~/01010cam/README.md ~/01010cam/post.php ~/01010cam/ngrok ~/01010cam/LICENSE ~')
+system('bash jmaxopcam.sh')
+exit()
+
