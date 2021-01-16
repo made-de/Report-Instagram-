@@ -1,30 +1,27 @@
-from os import *
-from sys import *
-from time import *
 system('pip install requests')
 import requests,uuid,secrets
-from time import sleep  
-  
-    system('termux-setup-storage -y')
-    system('clear')
-    print ('\033[1;32m              _                             _')
-    print ('''\033[1;32m  __   ___.--'_`.                       .'_`--.___   __''')
-    print ('''\033[1;32m ( _`.'. -   'o` )                     ( 'o`   - .`.'_ )''')
-    print ('''\033[1;32m _\.'_'      _.-'                       `-._      `_`./_''')
-    print ('''\033[1;32m( \`. )    //\` report instagram         '/\\    ( .'/  )''')
-    print ('''\033[1;32m \_`-'`---'\\__,                        ,__//`---'`-'_/ /''')
-    print ('''\033[1;32m  \`        `-\                        /-'        '/  /''')
-    print ('''\033[1;32m   `                                               `_ / ''')
-    print ( R + "    __  ___")
-    print ( R + "   /  |/  /___ _______      ______ _")
-    print ( R + "  / /|_/ / __ `/ ___/ | /| / / __ `/")
-    print ( R + " / /  / / /_/ / /   | |/ |/ / /_/ /")
-    print ( R + "/_/  /_/\__,_/_/    |__/|__/\__,_/")
+from time import sleep
 
-    print (' ')
-    print ( Y +"            | |    | |")
-    print ( Y +"            |_|\/\/|_|")
-    print ('               👉👈   ')
+system('termux-setup-storage -y')
+system('clear')
+print ('\033[1;32m              _                             _')
+print ('''\033[1;32m  __   ___.--'_`.                       .'_`--.___   __''')
+print ('''\033[1;32m ( _`.'. -   'o` )                     ( 'o`   - .`.'_ )''')
+print ('''\033[1;32m _\.'_'      _.-'                       `-._      `_`./_''')
+print ('''\033[1;32m( \`. )    //\` report instagram         '/\\    ( .'/  )''')
+print ('''\033[1;32m \_`-'`---'\\__,                        ,__//`---'`-'_/ /''')
+print ('''\033[1;32m  \`        `-\                        /-'        '/  /''')
+print ('''\033[1;32m   `                                               `_ / ''')
+print ( R + "    __  ___")
+print ( R + "   /  |/  /___ _______      ______ _")
+print ( R + "  / /|_/ / __ `/ ___/ | /| / / __ `/")
+print ( R + " / /  / / /_/ / /   | |/ |/ / /_/ /")
+print ( R + "/_/  /_/\__,_/_/    |__/|__/\__,_/")
+
+print (' ')
+print ( Y +"            | |    | |")
+print ( Y +"            |_|\/\/|_|")
+print ('               👉👈   ')
 
 
 uid = uuid.uuid4()
