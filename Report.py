@@ -1,9 +1,11 @@
-system('pip install requests')
 import requests,uuid,secrets
 from time import sleep
+R='\033[1;31m'
+G='\033[1;32m'
+Y='\033[1;33m'
+C='\033[1;36m'
+W='\033[1;37m'
 
-system('termux-setup-storage -y')
-system('clear')
 print ('\033[1;32m              _                             _')
 print ('''\033[1;32m  __   ___.--'_`.                       .'_`--.___   __''')
 print ('''\033[1;32m ( _`.'. -   'o` )                     ( 'o`   - .`.'_ )''')
@@ -26,7 +28,7 @@ print ('               👉👈   ')
 
 uid = uuid.uuid4()
 r = requests.Session()
-cookie = secrets.token_hex(8)*2 
+cookie = secrets.token_hex(8)*2
 username = input('your user:')
 password = input('your password:')
 target = input('target:')
@@ -38,7 +40,7 @@ print('''[1] = spam
 [5] = sale or drugs
 [6] = violance
 [7] = Nudity or pornography
-[8] = me ( impreion)''')    
+[8] = me ( impreion)''')
 mode= input ('mode?')
 def spam():
     global username
@@ -116,7 +118,7 @@ def hate():
             print('done hate {}'.format(done))
             sleep(sle)
             done += 1
-            
+
 def harsement():
     global username
     global password
@@ -168,7 +170,7 @@ def Ssleorpromotiondrugs():
             print('done sale {}'.format(done))
             sleep(sle)
             done += 1
-           
+
 def Violenceorthreatofviolence():
     global username
     global password
@@ -265,6 +267,5 @@ if mode == "8":
         mex()
 
 
-        
-login()
 
+login()
