@@ -1,3 +1,6 @@
+import requests,uuid,secrets
+
+from time import sleep
 uid = uuid.uuid4()
 r = requests.Session()
 cookie = secrets.token_hex(8)*2 
