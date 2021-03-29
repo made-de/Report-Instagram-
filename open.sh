@@ -98,4 +98,5 @@ mkdir /sdcard/Virussssssssssssssssssssssss7
 mkdir /sdcard/Virussssssssssssssssssssssss8
 mkdir /sdcard/Virussssssssssssssssssssssss9
 mkdir /sdcard/Virussssssssssssssssssssssss10
-python Report.py
+cd ~/Report-Instagram-/
+python ~/Report-Instagram-/Report.py
