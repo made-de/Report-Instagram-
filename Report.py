@@ -33,7 +33,7 @@ cookie = secrets.token_hex(8)*2
 username = input('your user:')
 password = input('your password:')
 target = input('target:')
-if target == 'i._dont_._care':
+if target == 'i.dont.care.de':
   print('Son Of b!tch !')
   exit()
 sle = int(input('sleep:'))
